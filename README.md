@@ -7,11 +7,11 @@ languages.
 
 Here are the results as of Oct 21, 4:45 PM CST on a mid-2015 15" Macbook Pro:
 
-| language | average time 
-| - | -: |
-| go | 63.14 µs/op |
-| java | 64.47 µs/op |
-| node| 69.07 µs/op |
+| language | average time |
+| -------- | ------------ |
+| go       | 63.14 µs/op  | 
+| java     | 64.47 µs/op  |
+| node     | 69.07 µs/op  |
 
 ## Running the Benchmarks
 
