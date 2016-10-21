@@ -1,0 +1,46 @@
+defmodule PortBench do
+  use Benchfella
+
+  setup_all do
+    {:ok, go_port} = PortHandler.start_link "./bench/go_port"
+    {:ok, node_port} = PortHandler.start_link "node ./bench/node_port.js"
+    {:ok, java_port} = PortHandler.start_link "java -cp bench JavaPort"
+
+    {:ok, %{ go: go_port, node: node_port, java: java_port }}
+  end
+
+  teardown_all ports do
+    PortHandler.close ports.go
+    PortHandler.close ports.node
+  end
+
+  bench("go", [ port: bench_context.go, id: gen_id() ]) do
+    iteration(port, id)
+  end
+
+  bench("node", [ port: bench_context.node, id: gen_id() ]) do
+    iteration(port, id)
+  end
+
+  bench("java", [ port: bench_context.java, id: gen_id() ]) do
+    iteration(port, id)
+  end
+
+  defp gen_id do
+    (:random.uniform * 10000)
+    |> Float.round
+  end
+
+  defp gen_complex_term(id), do: %{ id: id,
+				    type: :complex_term,
+				    name: "Term no. #{id}",
+				    children: [%{ foo: "bar" }, %{ bim: ['b', 'a', 'z'] }] }
+  defp iteration port, id do
+    msg = "#{inspect gen_complex_term(id)}\n"
+
+    case PortHandler.command(port, msg) do
+      {:error, reason} -> raise "Port error: #{inspect reason}"
+      {:ok, result} -> result
+    end
+  end
+end
