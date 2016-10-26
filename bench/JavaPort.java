@@ -10,7 +10,8 @@ public class JavaPort {
 	try {
 	    String line = null;
 	    while ((line = reader.readLine()) != null) {
-		System.out.println("Received message: '" + line + "'");
+		System.out.print("Received message: '" + line + "'");
+		System.out.flush();
 	    }
 	} catch(IOException e) {
 	    e.printStackTrace();
