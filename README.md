@@ -5,35 +5,39 @@ languages.
 
 ## Latest Stats
 
-Here are the results as of Oct 26 on a mid-2015 15" Macbook Pro:
+Here are the results as of Feb 03, 2017 on a very old 2009-era AMD Phenom 2 Desktop:
 
 ```
 Settings:
   duration:      1.0 s
 
-## LargeMsgBench
-large message is 8010 bytes.
-[11:13:39] 1/6: go
-[11:13:42] 2/6: java
-[11:13:44] 3/6: node
-## SmallMsgBench
-small message is 102 bytes.
-[11:13:47] 4/6: go
-[11:13:48] 5/6: java
-[11:13:50] 6/6: node
+  ## LargeMsgBench
+  large message is 8010 bytes.
+  [11:55:00] 1/8: go
+  [11:55:03] 2/8: java
+  [11:55:04] 3/8: node
+  [11:55:06] 4/8: rust
+  ## SmallMsgBench
+  small message is 102 bytes.
+  [11:55:09] 5/8: go
+  [11:55:12] 6/8: java
+  [11:55:14] 7/8: node
+  [11:55:18] 8/8: rust
 
-Finished in 14.09 seconds
+  Finished in 20.06 seconds
 
-## LargeMsgBench
-bench iterations   average time 
-go        100000   25.27 µs/op
-node       50000   36.81 µs/op
-java       50000   38.24 µs/op
-## SmallMsgBench
-bench iterations   average time 
-go        100000   12.48 µs/op
-java      100000   17.35 µs/op
-node      100000   28.24 µs/op
+  ## LargeMsgBench
+  bench iterations   average time
+  rust       50000   54.48 s/op
+  go         20000   93.18 s/op
+  node       10000   137.10 s/op
+  java        5000   209.14 s/op
+  ## SmallMsgBench
+  bench iterations   average time
+  rust      100000   20.69 s/op
+  go        100000   23.48 s/op
+  java       50000   35.86 s/op
+  node       50000   53.84 s/op
 ```
 
 ## Running the Benchmarks
