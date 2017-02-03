@@ -28,16 +28,16 @@ Settings:
 
   ## LargeMsgBench
   bench iterations   average time
-  rust       50000   54.48 s/op
-  go         20000   93.18 s/op
-  node       10000   137.10 s/op
-  java        5000   209.14 s/op
+  rust       50000   54.48 µs/op
+  go         20000   93.18 µs/op
+  node       10000   137.10 µs/op
+  java        5000   209.14 µs/op
   ## SmallMsgBench
   bench iterations   average time
-  rust      100000   20.69 s/op
-  go        100000   23.48 s/op
-  java       50000   35.86 s/op
-  node       50000   53.84 s/op
+  rust      100000   20.69 µs/op
+  go        100000   23.48 µs/op
+  java       50000   35.86 µs/op
+  node       50000   53.84 µs/op
 ```
 
 ## Running the Benchmarks
