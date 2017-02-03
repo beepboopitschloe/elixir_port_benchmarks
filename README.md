@@ -11,33 +11,37 @@ Here are the results as of Feb 03, 2017 on a very old 2009-era AMD Phenom 2 Desk
 Settings:
   duration:      1.0 s
 
-  ## LargeMsgBench
-  large message is 8010 bytes.
-  [11:55:00] 1/8: go
-  [11:55:03] 2/8: java
-  [11:55:04] 3/8: node
-  [11:55:06] 4/8: rust
-  ## SmallMsgBench
-  small message is 102 bytes.
-  [11:55:09] 5/8: go
-  [11:55:12] 6/8: java
-  [11:55:14] 7/8: node
-  [11:55:18] 8/8: rust
+## LargeMsgBench
+large message is 8010 bytes.
+[12:28:02] 1/10: go
+[12:28:05] 2/10: java
+[12:28:08] 3/10: node
+[12:28:10] 4/10: ocaml
+[12:28:13] 5/10: rust
+## SmallMsgBench
+small message is 102 bytes.
+[12:28:16] 6/10: go
+[12:28:18] 7/10: java
+[12:28:21] 8/10: node
+[12:28:24] 9/10: ocaml
+[12:28:26] 10/10: rust
 
-  Finished in 20.06 seconds
+Finished in 26.72 seconds
 
-  ## LargeMsgBench
-  bench iterations   average time
-  rust       50000   54.48 µs/op
-  go         20000   93.18 µs/op
-  node       10000   137.10 µs/op
-  java        5000   209.14 µs/op
-  ## SmallMsgBench
-  bench iterations   average time
-  rust      100000   20.69 µs/op
-  go        100000   23.48 µs/op
-  java       50000   35.86 µs/op
-  node       50000   53.84 µs/op
+## LargeMsgBench
+benchm iterations   average time
+rust        50000   53.28 µs/op
+ocaml       20000   84.54 µs/op
+go          20000   94.96 µs/op
+node        10000   136.08 µs/op
+java        10000   197.80 µs/op
+## SmallMsgBench
+benchm iterations   average time
+rust       100000   20.90 µs/op
+ocaml      100000   21.44 µs/op
+go         100000   24.25 µs/op
+java        50000   32.77 µs/op
+node        50000   52.35 µs/op
 ```
 
 ## Running the Benchmarks
@@ -46,6 +50,16 @@ Settings:
 $ mix deps.get
 $ mix compile
 $ mix bench
+```
+
+## Compiling
+
+Compiling the native applications for your system, run these from within the
+`./bench` directory:
+```sh
+go compile go_port.go
+rustc -C opt-level=3 rust_port.rs
+ocamlopt -o ocaml_port ocaml_port.ml
 ```
 
 ## Contributing
