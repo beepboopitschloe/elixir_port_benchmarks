@@ -6,6 +6,7 @@ defmodule SmallMsgBench do
     {:ok, node_port} = PortHandler.start_link("node ./bench/node_port.js")
     {:ok, java_port} = PortHandler.start_link("java -cp bench JavaPort")
     {:ok, rust_port} = PortHandler.start_link("./bench/rust_port")
+    {:ok, ocaml_port} = PortHandler.start_link("./bench/ocaml_port")
 
     msg = "#{inspect gen_complex_term(1)}\n"
     IO.puts "small message is #{String.length (msg)} bytes."
@@ -14,6 +15,7 @@ defmodule SmallMsgBench do
              node: node_port,
              java: java_port,
              rust: rust_port,
+             ocaml: ocaml_port,
              msg: msg }}
   end
 
@@ -22,6 +24,7 @@ defmodule SmallMsgBench do
     PortHandler.close(ports.node)
     PortHandler.close(ports.java)
     PortHandler.close(ports.rust)
+    PortHandler.close(ports.ocaml)
   end
 
   bench("go", [ port: bench_context.go,
@@ -41,6 +44,11 @@ defmodule SmallMsgBench do
 
   bench("rust", [ port: bench_context.rust,
                   msg: bench_context.msg ]) do
+    iteration(port, msg)
+  end
+
+  bench("ocaml", [ port: bench_context.ocaml,
+                   msg: bench_context.msg ]) do
     iteration(port, msg)
   end
 
