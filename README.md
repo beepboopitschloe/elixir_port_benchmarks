@@ -5,7 +5,7 @@ languages.
 
 ## Latest Stats
 
-Here are the results as of Oct 26 on a mid-2015 15" Macbook Pro:
+Here are the results as of Feb 03, 2017 on a very old 2009-era AMD Phenom 2 Desktop:
 
 ```
 Settings:
@@ -13,27 +13,35 @@ Settings:
 
 ## LargeMsgBench
 large message is 8010 bytes.
-[11:13:39] 1/6: go
-[11:13:42] 2/6: java
-[11:13:44] 3/6: node
+[12:28:02] 1/10: go
+[12:28:05] 2/10: java
+[12:28:08] 3/10: node
+[12:28:10] 4/10: ocaml
+[12:28:13] 5/10: rust
 ## SmallMsgBench
 small message is 102 bytes.
-[11:13:47] 4/6: go
-[11:13:48] 5/6: java
-[11:13:50] 6/6: node
+[12:28:16] 6/10: go
+[12:28:18] 7/10: java
+[12:28:21] 8/10: node
+[12:28:24] 9/10: ocaml
+[12:28:26] 10/10: rust
 
-Finished in 14.09 seconds
+Finished in 26.72 seconds
 
 ## LargeMsgBench
-bench iterations   average time 
-go        100000   25.27 µs/op
-node       50000   36.81 µs/op
-java       50000   38.24 µs/op
+benchm iterations   average time
+rust        50000   53.28 µs/op
+ocaml       20000   84.54 µs/op
+go          20000   94.96 µs/op
+node        10000   136.08 µs/op
+java        10000   197.80 µs/op
 ## SmallMsgBench
-bench iterations   average time 
-go        100000   12.48 µs/op
-java      100000   17.35 µs/op
-node      100000   28.24 µs/op
+benchm iterations   average time
+rust       100000   20.90 µs/op
+ocaml      100000   21.44 µs/op
+go         100000   24.25 µs/op
+java        50000   32.77 µs/op
+node        50000   52.35 µs/op
 ```
 
 ## Running the Benchmarks
@@ -42,6 +50,16 @@ node      100000   28.24 µs/op
 $ mix deps.get
 $ mix compile
 $ mix bench
+```
+
+## Compiling
+
+Compiling the native applications for your system, run these from within the
+`./bench` directory:
+```sh
+go compile go_port.go
+rustc -C opt-level=3 rust_port.rs
+ocamlopt -o ocaml_port ocaml_port.ml
 ```
 
 ## Contributing

@@ -2,9 +2,11 @@ defmodule LargeMsgBench do
   use Benchfella
 
   setup_all do
-    {:ok, go_port} = PortHandler.start_link "./bench/go_port"
-    {:ok, node_port} = PortHandler.start_link "node ./bench/node_port.js"
-    {:ok, java_port} = PortHandler.start_link "java -cp bench JavaPort"
+    {:ok, go_port} = PortHandler.start_link("./bench/go_port")
+    {:ok, node_port} = PortHandler.start_link("node ./bench/node_port.js")
+    {:ok, java_port} = PortHandler.start_link("java -cp bench JavaPort")
+    {:ok, rust_port} = PortHandler.start_link("./bench/rust_port")
+    {:ok, ocaml_port} = PortHandler.start_link("./bench/ocaml_port")
 
     msg = "#{inspect gen_many_complex_terms(75)}\n"
     IO.puts "large message is #{String.length (msg)} bytes."
@@ -12,12 +14,17 @@ defmodule LargeMsgBench do
     {:ok, %{ go: go_port,
 	     node: node_port,
 	     java: java_port,
+             rust: rust_port,
+             ocaml: ocaml_port,
 	     msg: msg }}
   end
 
   teardown_all ports do
-    PortHandler.close ports.go
-    PortHandler.close ports.node
+    PortHandler.close(ports.go)
+    PortHandler.close(ports.node)
+    PortHandler.close(ports.java)
+    PortHandler.close(ports.rust)
+    PortHandler.close(ports.ocaml)
   end
 
   bench("go", [ port: bench_context.go,
@@ -32,6 +39,16 @@ defmodule LargeMsgBench do
 
   bench("java", [ port: bench_context.java,
 		  msg: bench_context.msg ]) do
+    iteration(port, msg)
+  end
+
+  bench("rust", [ port: bench_context.rust,
+                  msg: bench_context.msg ]) do
+    iteration(port, msg)
+  end
+
+  bench("ocaml", [ port: bench_context.ocaml,
+                   msg: bench_context.msg ]) do
     iteration(port, msg)
   end
 
