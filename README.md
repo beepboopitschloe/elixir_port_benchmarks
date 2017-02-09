@@ -60,6 +60,7 @@ Compiling the native applications for your system, run these from within the
 go compile go_port.go
 rustc -C opt-level=3 rust_port.rs
 ocamlopt -o ocaml_port ocaml_port.ml
+swiftc swift_port.swift
 ```
 
 ## Contributing
