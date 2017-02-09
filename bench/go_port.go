@@ -11,6 +11,6 @@ func main() {
 
   for {
     text, _ := reader.ReadString('\n')
-    fmt.Println("responding to", text)
+    fmt.Println("Responding to", text)
   }
 }

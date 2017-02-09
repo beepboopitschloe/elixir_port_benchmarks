@@ -7,8 +7,8 @@ fn main() {
         let mut text = String::new();
         match io::stdin().read_line(&mut text) {
             Ok(0) => break,
-            //Ok(_size) => println!("responding to {}", text),
-            Ok(_size) => { let _ = handle.write_fmt(format_args!("responding to {}", text)); }
+            //Ok(_size) => println!("Responding to {}", text),
+            Ok(_size) => { let _ = handle.write_fmt(format_args!("Responding to {}", text)); }
             Err(_err) => break,
         }
     }
